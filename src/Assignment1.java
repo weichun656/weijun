@@ -64,35 +64,28 @@ public class Assignment1 {
             System.out.println("Tag					Type		Count	Value");
             System.out.println("---------------------------------------------------------------------");
             
-            ArrayList<Integer> num = new ArrayList<Integer>(); // Create an ArrayList object
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
             
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-            num.add(value = myInputFile.read());
-//            System.out.println(num.get(0));
-
-            String tag = getTag(num.get(0),num.get(1));
-//            System.out.print(tag);
-            
-            String type = getType(num.get(2),num.get(3));
-//            System.out.print(type);
-            
-            String length = getLength(num.get(4),num.get(5),num.get(6),num.get(7));
-            
-            String fvalue = getValue(num.get(8),num.get(9),num.get(10),num.get(11));
-//            System.out.print(fvalue);
-            
-            System.out.println(tag + "                                      " + type + "               " + 1 + "       " + fvalue);
+            ArrayList<String> num = new ArrayList<String>(); // Create an ArrayList object
+            num.add("0");
+            for(int array=1;array<(12*m);array++){
+//                num.add(value = myInputFile.read());
+                value = myInputFile.read();
+                String data = String.format("%02X", value);
+                num.add(data);
+            }
+//            System.out.println(num.get(2));
+            String tag = "";
+            String type = "";
+            String length = "";
+            String fvalue = "";
+            for(int j=0;j<m;j++){
+                tag = getTag(num.get(1+(12*j)),num.get(2+(12*j)));
+                type = getType(num.get(3+(12*j)),num.get(4+(12*j)));
+                length = getLength(num.get(5+(12*j)),num.get(6+(12*j)),num.get(7+(12*j)),num.get(8+(12*j)));
+                fvalue = getValue(num.get(9+(12*j)),num.get(10+(12*j)),num.get(11+(12*j)),num.get(12+(12*j)));
+//                System.out.print(tag);
+                System.out.println(tag + "                                      " + type + "               " + length + "       " + fvalue);
+            }
 //            int addTW = i + (12*m);
 //            System.out.println("");
 //            System.out.print("DE : ");
@@ -104,46 +97,32 @@ public class Assignment1 {
             System.out.println("File Error!!!");
         }
     }
-    public static String getTag(int i, int m){
-        String first = String.valueOf(i);
-        String second = String.valueOf(m);
+    public static String getTag(String i, String m){
 
-        String tag = second + first;
-        int value = Integer.parseInt(tag);
+        String tag = i + m;
+        int value = Integer.parseInt(tag,16);
+        String hex = String.format("%02X", value);
+        
+        return hex;
+    }
+    public static String getType(String i, String m){
+
+         String tag = i + m;
+        int value = Integer.parseInt(tag,16);
+        String hex = Integer.toHexString(value);
+        
+        return tag;
+    }
+    public static String getLength(String i, String m, String j, String k){
+        String tag = k + j + m + i;
+        int value = Integer.parseInt(tag,16);
         String hex = Integer.toHexString(value);
         
         return hex;
     }
-    public static String getType(int i, int m){
-        String first = String.valueOf(i);
-        String second = String.valueOf(m);
-
-        String tag = second + first;
-        int value = Integer.parseInt(tag);
-        String hex = Integer.toHexString(value);
-        
-        return hex;
-    }
-    public static String getLength(int i, int m, int j, int k){
-        String first = String.valueOf(i);
-        String second = String.valueOf(m);
-        String third = String.valueOf(i);
-        String fourly = String.valueOf(m);
-
-        String tag = fourly + third + second + first;
-        int value = Integer.parseInt(tag);
-        String hex = Integer.toHexString(value);
-        
-        return hex;
-    }
-    public static String getValue(int i, int m, int j, int k){
-        String first = String.valueOf(i);
-        String second = String.valueOf(m);
-        String third = String.valueOf(i);
-        String fourly = String.valueOf(m);
-
-        String tag = fourly + third + second + first;
-        int value = Integer.parseInt(tag);
+    public static String getValue(String i, String m, String j, String k){
+        String tag = k + j + m + i;
+        int value = Integer.parseInt(tag,16);
         String hex = Integer.toHexString(value);
         return hex;
     }
