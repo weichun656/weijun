@@ -2,6 +2,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList; // import the ArrayList class
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,9 +11,9 @@ import java.util.ArrayList; // import the ArrayList class
 
 /**
  *
- * @author Student
+ * @author User
  */
-public class Assignment1 {
+public class assignment {
     public static void main(String[] args) {
         try{
             FileInputStream myInputFile = new FileInputStream("image/Imgpro.tif");
